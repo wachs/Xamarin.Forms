@@ -85,10 +85,10 @@ namespace Xamarin.Forms.Platform.Android
 				// Add Android's default material shadow if we want it
 				if (useDefaultShadow)
 				{
-					shadowRadius = 2;
-					shadowDy = 4;
+					shadowRadius = 5;
+					shadowDy = 1;
 					shadowDx = 0;
-					shadowColor = _backgroundDrawable.PressedBackgroundColor.ToAndroid();
+					shadowColor = Color.FromHex("#c4c4c4").ToAndroid();
 				}
 				// Otherwise get values from the control (but only for supported APIs)
 				else if ((int)Build.VERSION.SdkInt >= 16)
