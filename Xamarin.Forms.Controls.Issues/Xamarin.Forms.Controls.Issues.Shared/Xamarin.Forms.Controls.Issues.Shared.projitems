@@ -9,7 +9,11 @@
     <Import_RootNamespace>Xamarin.Forms.Controls.Issues</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-	  <Compile Include="$(MSBuildThisFileDirectory)Issue2894.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)A11yTabIndex.xaml.cs">
+      <DependentUpon>A11yTabIndex.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Issue2894.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Issue3524.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Issue2004.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Issue3333.cs" />
@@ -970,6 +974,12 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Issue2858.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)A11yTabIndex.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
 </Project>
