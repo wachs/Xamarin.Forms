@@ -81,6 +81,7 @@
     <Compile Include="RegionTests.cs" />
     <Compile Include="SpanTests.cs" />
     <Compile Include="TabIndexTests.cs" />
+    <Compile Include="TitleViewUnitTests.cs" />
     <Compile Include="TemplatedViewUnitTests.cs" />
     <Compile Include="TemplatedPageUnitTests.cs" />
     <Compile Include="ContentFormUnitTests.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="FlexLayoutAlignContentTests.cs" />
     <Compile Include="FlexLayoutAlignSelfTests.cs" />
     <Compile Include="FlexOrderTests.cs" />
+    <Compile Include="FontAttributeConverterUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
