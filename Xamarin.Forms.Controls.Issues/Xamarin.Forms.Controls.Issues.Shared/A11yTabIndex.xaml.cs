@@ -9,12 +9,13 @@ using Xamarin.Forms.Xaml;
 
 namespace Xamarin.Forms.Controls.Issues
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class A11yTabIndex : ContentPage
 	{
 		public A11yTabIndex()
 		{
+#if APP
 			InitializeComponent();
+#endif
 		}
 	}
 }
