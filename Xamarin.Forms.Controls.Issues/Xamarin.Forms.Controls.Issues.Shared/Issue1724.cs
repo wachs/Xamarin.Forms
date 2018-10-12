@@ -52,6 +52,18 @@ namespace Xamarin.Forms.Controls.Issues
 						Source = "coffee.png",
 						BackgroundColor = Color.ForestGreen,
 						Padding = new Thickness(0, 0, 0, 30)
+					},
+					new Label(){ Text = "Do you see image from a Uri?" },
+					new ImageButton()
+					{
+						Source = "https://raw.githubusercontent.com/xamarin/Xamarin.Forms/master/Xamarin.Forms.Controls/coffee.png",
+						BackgroundColor = Color.ForestGreen
+					},
+					new Label(){ Text = "Invalid Image Uri just to test it doesn't crash" },
+					new ImageButton()
+					{
+						Source = "http://xamarin.com/imginvalidf@#$R(P&fb.png",
+						BackgroundColor = Color.ForestGreen
 					}
 				}
 			};

@@ -9,11 +9,16 @@ namespace Xamarin.Forms.Platform.Android
 	{
 		public static void Init(IVisualElementRenderer renderer)
 		{
+			_ = renderer ?? throw new ArgumentNullException($"{nameof(BackgroundManager)}.{nameof(Init)} {nameof(renderer)} cannot be null");
+
 			renderer.ElementPropertyChanged += OnElementPropertyChanged;
 			renderer.ElementChanged += OnElementChanged;
 		}
+
 		public static void Dispose(IVisualElementRenderer renderer)
 		{
+			_ = renderer ?? throw new ArgumentNullException($"{nameof(BackgroundManager)}.{nameof(Init)} {nameof(renderer)} cannot be null");
+
 			renderer.ElementPropertyChanged -= OnElementPropertyChanged;
 			renderer.ElementChanged -= OnElementChanged;
 		}

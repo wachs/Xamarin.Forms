@@ -80,10 +80,10 @@ namespace Xamarin.Forms
 		BindableProperty IImageController.AspectProperty => AspectProperty;
 		BindableProperty IImageController.IsOpaqueProperty => IsOpaqueProperty;
 
-		private void OnImageSourcesSourceChanged(object sender, EventArgs e) =>
+		void OnImageSourcesSourceChanged(object sender, EventArgs e) =>
 			ImageElementManager.ImageSourcesSourceChanged(this, EventArgs.Empty);
 
-		private static void OnImageSourceChanged(BindableObject bindable, object oldValue, object newValue)
+		static void OnImageSourceChanged(BindableObject bindable, object oldValue, object newValue)
 		{
 			ImageSource newSource = (ImageSource)newValue;
 			Image image = (Image)bindable;
@@ -94,7 +94,7 @@ namespace Xamarin.Forms
 			ImageElementManager.ImageSourceChanged(bindable, newSource);
 		}
 
-		private static void OnImageSourceChanging(BindableObject bindable, object oldValue, object newValue)
+		static void OnImageSourceChanging(BindableObject bindable, object oldValue, object newValue)
 		{
 			ImageSource oldSource = (ImageSource)oldValue;
 			Image image = (Image)bindable;

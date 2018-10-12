@@ -27,7 +27,7 @@ namespace Xamarin.Forms.Platform.UWP
 			renderer.ControlChanged -= OnControlChanged;
 		}
 
-		private static void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+		static void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			IImageVisualElementRenderer renderer = sender as IImageVisualElementRenderer;
 			var controller = renderer.Element as IImageController;
@@ -36,7 +36,7 @@ namespace Xamarin.Forms.Platform.UWP
 				UpdateAspect(renderer, controller);
 		}
 
-		private static void OnElementChanged(object sender, VisualElementChangedEventArgs e)
+		static void OnElementChanged(object sender, VisualElementChangedEventArgs e)
 		{
 			if (e.NewElement != null)
 			{
@@ -49,7 +49,7 @@ namespace Xamarin.Forms.Platform.UWP
 
 
 
-		private static void OnControlChanged(object sender, EventArgs e)
+		static void OnControlChanged(object sender, EventArgs e)
 		{
 			IImageVisualElementRenderer renderer = sender as IImageVisualElementRenderer;
 

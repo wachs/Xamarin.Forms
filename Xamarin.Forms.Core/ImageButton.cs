@@ -196,10 +196,10 @@ namespace Xamarin.Forms
 
 		BindableProperty IImageController.IsOpaqueProperty => IsOpaqueProperty;
 
-		private void OnImageSourcesSourceChanged(object sender, EventArgs e) =>
+		void OnImageSourcesSourceChanged(object sender, EventArgs e) =>
 			ImageElementManager.ImageSourcesSourceChanged(this, EventArgs.Empty);
 
-		private static void OnImageSourceChanged(BindableObject bindable, object oldValue, object newValue)
+		static void OnImageSourceChanged(BindableObject bindable, object oldValue, object newValue)
 		{
 			ImageSource newSource = (ImageSource)newValue;
 			ImageButton button = (ImageButton)bindable;
@@ -210,7 +210,7 @@ namespace Xamarin.Forms
 			ImageElementManager.ImageSourceChanged(bindable, newSource);
 		}
 
-		private static void OnImageSourceChanging(BindableObject bindable, object oldValue, object newValue)
+		static void OnImageSourceChanging(BindableObject bindable, object oldValue, object newValue)
 		{
 			ImageSource oldSource = (ImageSource)oldValue;
 			ImageButton button = (ImageButton)bindable;
@@ -222,10 +222,10 @@ namespace Xamarin.Forms
 			ImageElementManager.ImageSourceChanging(oldSource);
 		}
 
-		private void OnCommandCanExecuteChanged(object sender, EventArgs e) =>
+		void OnCommandCanExecuteChanged(object sender, EventArgs e) =>
 			ButtonElementManager.CommandCanExecuteChanged(this, EventArgs.Empty);
 
-		private static void OnCommandChanged(BindableObject bo, object o, object n)
+		static void OnCommandChanged(BindableObject bo, object o, object n)
 		{
 			var button = (ImageButton)bo;
 			if (n is ICommand newCommand)
@@ -234,7 +234,7 @@ namespace Xamarin.Forms
 			ButtonElementManager.CommandChanged(button);
 		}
 
-		private static void OnCommandChanging(BindableObject bo, object o, object n)
+		static void OnCommandChanging(BindableObject bo, object o, object n)
 		{
 			var button = (ImageButton)bo;
 			if (o != null)

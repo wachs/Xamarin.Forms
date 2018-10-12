@@ -32,11 +32,6 @@ namespace Xamarin.Forms.Core.UITests
 		}
 
 		[UiTestExempt(ExemptReason.CannotTest, "Invalid interaction")]
-		public override void _IsEnabled()
-		{
-		}
-
-		[UiTestExempt(ExemptReason.CannotTest, "Invalid interaction")]
 		public override void _IsFocused()
 		{
 		}
@@ -102,6 +97,23 @@ namespace Xamarin.Forms.Core.UITests
 
 			var textAfterClick = remote.GetEventLabel().Text;
 			Assert.AreEqual("Event: Clicked (fired 1)", textAfterClick);
+		}
+
+		[Test]
+		[UiTest(typeof(ImageButton), "Pressed")]
+		public void Pressed()
+		{
+			var remote = new EventViewContainerRemote(App, Test.ImageButton.Pressed, PlatformViewType);
+			remote.GoTo();
+
+			var textBeforeClick = remote.GetEventLabel().Text;
+			Assert.AreEqual("Event: Pressed (none)", textBeforeClick);
+
+			// Press ImageButton
+			remote.TouchAndHoldView();
+
+			var textAfterClick = remote.GetEventLabel().Text;
+			Assert.AreEqual("Event: Pressed (fired 1)", textAfterClick);
 		}
 
 		[Test]

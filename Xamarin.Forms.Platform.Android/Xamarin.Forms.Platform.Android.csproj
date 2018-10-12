@@ -114,7 +114,7 @@
     <Compile Include="AppCompat\FrameRenderer.cs" />
     <Compile Include="BackgroundManager.cs" />
     <Compile Include="AppCompat\ILifeCycleState.cs" />
-    <Compile Include="ButtonBackgroundTracker.cs" />
+    <Compile Include="BorderBackgroundManager.cs" />
     <Compile Include="Elevation.cs" />
     <Compile Include="Extensions\EntryRendererExtensions.cs" />
     <Compile Include="Extensions\FragmentManagerExtensions.cs" />

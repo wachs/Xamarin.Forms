@@ -19,7 +19,7 @@ namespace Xamarin.Forms.Platform.iOS
 			renderer.ControlChanged += OnControlChanged;
 		}
 
-		private static void OnControlChanged(object sender, EventArgs e)
+		static void OnControlChanged(object sender, EventArgs e)
 		{
 			var renderer = (IVisualNativeElementRenderer)sender;
 			var control = (UIButton)renderer.Control;
@@ -60,12 +60,12 @@ namespace Xamarin.Forms.Platform.iOS
 			control.TouchDown -= TouchDown;
 		}
 
-		private static void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+		static void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 		}
 
 
-		private static void SetControlPropertiesFromProxy(UIButton control)
+		static void SetControlPropertiesFromProxy(UIButton control)
 		{
 			foreach (UIControlState uiControlState in s_controlStates)
 			{

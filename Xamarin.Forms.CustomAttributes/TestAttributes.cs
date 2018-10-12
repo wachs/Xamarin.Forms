@@ -228,7 +228,8 @@ namespace Xamarin.Forms.CustomAttributes
 			BorderColor,
 			BorderRadius,
 			Image,
-			Padding
+			Padding,
+			Pressed
 		}
 
 		public enum VisualElement
@@ -561,7 +562,8 @@ namespace Xamarin.Forms.CustomAttributes
 			BorderWidth,
 			Clicked,
 			Command,
-			Image
+			Image,
+			Pressed
 		}
 
 		public enum ImageSource

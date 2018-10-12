@@ -28,18 +28,28 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 		int? _defaultLabelFor;
 		VisualElementTracker _tracker;
 		VisualElementRenderer _visualElementRenderer;
-		private BorderBackgroundManager _backgroundTracker;
+		BorderBackgroundManager _backgroundTracker;
+		IPlatformElementConfiguration<PlatformConfiguration.Android, ImageButton> _platformElementConfiguration;
+		private ImageButton _imageButton;
 
 		public event EventHandler<VisualElementChangedEventArgs> ElementChanged;
 		public event EventHandler<PropertyChangedEventArgs> ElementPropertyChanged;
 
 		void IVisualElementRenderer.UpdateLayout() => _tracker?.UpdateLayout();
-		VisualElement IVisualElementRenderer.Element => Button;
+		VisualElement IVisualElementRenderer.Element => ImageButton;
 		AView IVisualElementRenderer.View => this;
 		ViewGroup IVisualElementRenderer.ViewGroup => null;
 		VisualElementTracker IVisualElementRenderer.Tracker => _tracker;
 
-		ImageButton Button { get; set; }
+		ImageButton ImageButton
+		{
+			get => _imageButton;
+			set
+			{
+				_imageButton = value;
+				_platformElementConfiguration = null;
+			}
+		}
 
 		void IImageRendererController.SkipInvalidate() => _skipInvalidate = true;
 		bool IImageRendererController.IsDisposed => _disposed;
@@ -77,16 +87,16 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 				_backgroundTracker?.Dispose();
 				_backgroundTracker = null;
 
-				if (Button != null)
+				if (ImageButton != null)
 				{
-					Button.PropertyChanged -= OnElementPropertyChanged;
+					ImageButton.PropertyChanged -= OnElementPropertyChanged;
 
-					if (Platform.GetRenderer(Button) == this)
+					if (Platform.GetRenderer(ImageButton) == this)
 					{
-						Button.ClearValue(Platform.RendererProperty);
+						ImageButton.ClearValue(Platform.RendererProperty);
 					}
 
-					Button = null;
+					ImageButton = null;
 				}
 			}
 
@@ -132,8 +142,8 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 				throw new ArgumentException("Element is not of type " + typeof(ImageButton), nameof(element));
 			}
 
-			ImageButton oldElement = Button;
-			Button = image;
+			ImageButton oldElement = ImageButton;
+			ImageButton = image;
 
 			var reference = Guid.NewGuid().ToString();
 			Performance.Start(reference);
@@ -162,8 +172,8 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 			UpdateInputTransparent();
 			UpdatePadding();
 
-			ElementChanged?.Invoke(this, new VisualElementChangedEventArgs(oldElement, Button));
-			Button?.SendViewInitialized(Control);
+			ElementChanged?.Invoke(this, new VisualElementChangedEventArgs(oldElement, ImageButton));
+			ImageButton?.SendViewInitialized(Control);
 		}
 
 		void IVisualElementRenderer.SetLabelFor(int? id)
@@ -186,21 +196,21 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 		void UpdatePadding()
 		{
 			SetPadding(
-				(int)(Context.ToPixels(Button.Padding.Left)),
-				(int)(Context.ToPixels(Button.Padding.Top)),
-				(int)(Context.ToPixels(Button.Padding.Right)),
-				(int)(Context.ToPixels(Button.Padding.Bottom))
+				(int)(Context.ToPixels(ImageButton.Padding.Left)),
+				(int)(Context.ToPixels(ImageButton.Padding.Top)),
+				(int)(Context.ToPixels(ImageButton.Padding.Right)),
+				(int)(Context.ToPixels(ImageButton.Padding.Bottom))
 			);
 		}
 
 		void UpdateInputTransparent()
 		{
-			if (Button == null || _disposed)
+			if (ImageButton == null || _disposed)
 			{
 				return;
 			}
 
-			_inputTransparent = Button.InputTransparent;
+			_inputTransparent = ImageButton.InputTransparent;
 		}
 
 		// Image related
@@ -222,27 +232,35 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 		// general state related
 		void IOnFocusChangeListener.OnFocusChange(AView v, bool hasFocus)
 		{
-			((IElementController)Button).SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, hasFocus);
+			((IElementController)ImageButton).SetValueFromRenderer(VisualElement.IsFocusedPropertyKey, hasFocus);
 		}
 		// general state related
 
 
 		// Button related
 		void IOnClickListener.OnClick(AView v) =>
-			ButtonElementManager.OnClick(Button, Button, v);
+			ButtonElementManager.OnClick(ImageButton, ImageButton, v);
 
 		bool IOnTouchListener.OnTouch(AView v, MotionEvent e) =>
-			ButtonElementManager.OnTouch(Button, Button, v, e);
+			ButtonElementManager.OnTouch(ImageButton, ImageButton, v, e);
 		// Button related
 
 
-		float IBorderVisualElementRenderer.ShadowRadius => Context.ToPixels(Button.OnThisPlatform().GetShadowRadius());
-		float IBorderVisualElementRenderer.ShadowDx => Context.ToPixels(Button.OnThisPlatform().GetShadowOffset().Width);
-		float IBorderVisualElementRenderer.ShadowDy => Context.ToPixels(Button.OnThisPlatform().GetShadowOffset().Height);
-		AColor IBorderVisualElementRenderer.ShadowColor => Button.OnThisPlatform().GetShadowColor().ToAndroid();
-		bool IBorderVisualElementRenderer.IsShadowEnabled() => Button.OnThisPlatform().GetIsShadowEnabled();
+		float IBorderVisualElementRenderer.ShadowRadius => Context.ToPixels(OnThisPlatform().GetShadowRadius());
+		float IBorderVisualElementRenderer.ShadowDx => Context.ToPixels(OnThisPlatform().GetShadowOffset().Width);
+		float IBorderVisualElementRenderer.ShadowDy => Context.ToPixels(OnThisPlatform().GetShadowOffset().Height);
+		AColor IBorderVisualElementRenderer.ShadowColor => OnThisPlatform().GetShadowColor().ToAndroid();
+		bool IBorderVisualElementRenderer.IsShadowEnabled() => OnThisPlatform().GetIsShadowEnabled();
 
 		bool IBorderVisualElementRenderer.UseDefaultPadding() => false;
 		bool IBorderVisualElementRenderer.UseDefaultShadow() => false;
+
+		IPlatformElementConfiguration<PlatformConfiguration.Android, ImageButton> OnThisPlatform()
+		{
+			if (_platformElementConfiguration == null)
+				_platformElementConfiguration = ImageButton.OnThisPlatform();
+
+			return _platformElementConfiguration;
+		}
 	}
 }

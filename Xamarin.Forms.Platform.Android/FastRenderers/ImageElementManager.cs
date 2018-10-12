@@ -17,7 +17,7 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 			renderer.ElementChanged -= OnElementChanged;
 		}
 
-		private async static void OnElementChanged(object sender, VisualElementChangedEventArgs e)
+		async static void OnElementChanged(object sender, VisualElementChangedEventArgs e)
 		{
 			var renderer = (sender as IVisualElementRenderer);
 			var view = renderer.View as ImageView;
@@ -34,7 +34,7 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 			}
 		}
 
-		private async static void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+		async static void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			var renderer = (sender as IVisualElementRenderer);
 			var ImageElementManager = (IImageController)renderer.Element;

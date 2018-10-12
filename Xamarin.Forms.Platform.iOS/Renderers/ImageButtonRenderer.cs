@@ -133,7 +133,7 @@ namespace Xamarin.Forms.Platform.iOS
 		bool IImageVisualElementRenderer.IsDisposed => _isDisposed;
 		void IImageVisualElementRenderer.SetImage(UIImage image)
 		{
-			Control.SetImage(image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), UIControlState.Normal);
+			Control.SetImage(image?.ImageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), UIControlState.Normal);
 			Control.HorizontalAlignment = UIControlContentHorizontalAlignment.Fill;
 			Control.VerticalAlignment = UIControlContentVerticalAlignment.Fill;
 		}

@@ -5,9 +5,7 @@
 	public static class ImageButton
 	{
 		#region Shadow
-		public static readonly BindableProperty IsShadowEnabledProperty =
-	BindableProperty.Create("IsShadowEnabled", typeof(bool),
-	typeof(Forms.ImageButton), false);
+		public static readonly BindableProperty IsShadowEnabledProperty = BindableProperty.Create("IsShadowEnabled", typeof(bool), typeof(Forms.ImageButton), false);
 
 		public static bool GetIsShadowEnabled(BindableObject element)
 		{
@@ -30,9 +28,7 @@
 			return config;
 		}
 
-		public static readonly BindableProperty ShadowColorProperty =
-			BindableProperty.Create("ShadowColor", typeof(Color),
-			typeof(VisualElement), Color.Default);
+		public static readonly BindableProperty ShadowColorProperty = BindableProperty.Create("ShadowColor", typeof(Color), typeof(ImageButton), Color.Default);
 
 		public static Color GetShadowColor(BindableObject element)
 		{
@@ -55,9 +51,7 @@
 			return config;
 		}
 
-		public static readonly BindableProperty ShadowRadiusProperty =
-			BindableProperty.Create("ShadowRadius", typeof(double),
-			typeof(VisualElement), 10.0);
+		public static readonly BindableProperty ShadowRadiusProperty = BindableProperty.Create("ShadowRadius", typeof(double), typeof(ImageButton), 10.0);
 
 		public static double GetShadowRadius(BindableObject element)
 		{
@@ -80,9 +74,7 @@
 			return config;
 		}
 
-		public static readonly BindableProperty ShadowOffsetProperty =
-		BindableProperty.Create("ShadowOffset", typeof(Size),
-		typeof(VisualElement), Size.Zero);
+		public static readonly BindableProperty ShadowOffsetProperty = BindableProperty.Create("ShadowOffset", typeof(Size), typeof(VisualElement), Size.Zero);
 
 		public static Size GetShadowOffset(BindableObject element)
 		{

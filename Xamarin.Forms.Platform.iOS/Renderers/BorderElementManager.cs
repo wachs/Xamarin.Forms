@@ -22,7 +22,7 @@ namespace Xamarin.Forms.Platform.iOS
 			renderer.ControlChanged -= OnControlChanged;
 		}
 
-		private static void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+		static void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			IVisualNativeElementRenderer renderer = (IVisualNativeElementRenderer)sender;
 			IBorderController backgroundView = (IBorderController)renderer.Element;
@@ -31,7 +31,7 @@ namespace Xamarin.Forms.Platform.iOS
 				UpdateBorder(renderer, backgroundView);
 		}
 
-		private static void OnElementChanged(object sender, VisualElementChangedEventArgs e)
+		static void OnElementChanged(object sender, VisualElementChangedEventArgs e)
 		{
 			if (e.NewElement != null)
 			{
@@ -62,7 +62,7 @@ namespace Xamarin.Forms.Platform.iOS
 			control.Layer.CornerRadius = cornerRadius;
 		}
 
-		private static void OnControlChanged(object sender, EventArgs e)
+		static void OnControlChanged(object sender, EventArgs e)
 		{
 			IVisualNativeElementRenderer renderer = (IVisualNativeElementRenderer)sender;
 			IBorderController backgroundView = (IBorderController)renderer.Element;

@@ -26,7 +26,7 @@ namespace Xamarin.Forms.Platform.iOS
 		}
 
 
-		private static void OnControlChanged(object sender, EventArgs e)
+		static void OnControlChanged(object sender, EventArgs e)
 		{
 			var renderer = sender as IImageVisualElementRenderer;
 			var imageElement = renderer.Element as IImageController;
@@ -34,7 +34,7 @@ namespace Xamarin.Forms.Platform.iOS
 			SetOpacity(renderer, imageElement);
 		}
 
-		private static void OnElementChanged(object sender, VisualElementChangedEventArgs e)
+		static void OnElementChanged(object sender, VisualElementChangedEventArgs e)
 		{
 			if (e.NewElement != null)
 			{
@@ -46,7 +46,7 @@ namespace Xamarin.Forms.Platform.iOS
 			}
 		}
 
-		private static void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+		static void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			var renderer = sender as IImageVisualElementRenderer;
 			var imageElement = renderer.Element as IImageController;
@@ -88,6 +88,9 @@ namespace Xamarin.Forms.Platform.iOS
 
 		public static async Task SetImage(IImageVisualElementRenderer renderer, IImageController imageElement, Image oldElement = null)
 		{
+			_ = renderer ?? throw new ArgumentNullException($"{nameof(ImageElementManager)}.{nameof(SetImage)} {nameof(renderer)} cannot be null");
+			_ = imageElement ?? throw new ArgumentNullException($"{nameof(ImageElementManager)}.{nameof(SetImage)} {nameof(imageElement)} cannot be null");
+
 			var Element = renderer.Element;
 			var Control = renderer.GetImage();
 

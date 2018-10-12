@@ -71,6 +71,14 @@ namespace Xamarin.Forms.Controls
 			);
 			clickedContainer.View.Clicked += (sender, args) => clickedContainer.EventFired();
 
+			var pressedContainer = new EventViewContainer<ImageButton>(Test.ImageButton.Pressed,
+				new ImageButton
+				{
+					Source = "oasissmall.jpg"
+				}
+			);
+			pressedContainer.View.Pressed += (sender, args) => pressedContainer.EventFired();
+
 			var commandContainer = new ViewContainer<ImageButton>(Test.ImageButton.Command,
 				new ImageButton
 				{
@@ -105,6 +113,7 @@ namespace Xamarin.Forms.Controls
 			Add(borderButtonContainer);
 			Add(borderWidthContainer);
 			Add(clickedContainer);
+			Add(pressedContainer);
 			Add(commandContainer);
 			Add(corderRadiusContainer);
 			Add(imageContainer);

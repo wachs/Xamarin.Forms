@@ -11,6 +11,7 @@ using AView = Android.Views.View;
 using static System.String;
 using AColor = Android.Graphics.Color;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace Xamarin.Forms.Platform.Android.FastRenderers
 {
@@ -29,6 +30,8 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 		VisualElementRenderer _visualElementRenderer;
 		BorderBackgroundManager _backgroundTracker;
 		Thickness _paddingDeltaPix = new Thickness();
+		IPlatformElementConfiguration<PlatformConfiguration.Android, Button> _platformElementConfiguration;
+		private Button _button;
 
 		public event EventHandler<VisualElementChangedEventArgs> ElementChanged;
 		public event EventHandler<PropertyChangedEventArgs> ElementPropertyChanged;
@@ -53,7 +56,15 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 		ViewGroup IVisualElementRenderer.ViewGroup => null;
 		VisualElementTracker IVisualElementRenderer.Tracker => _tracker;
 
-		Button Button { get; set; }
+		Button Button
+		{
+			get => _button;
+			set
+			{
+				_button = value;
+				_platformElementConfiguration = null;
+			}
+		}
 
 		AView ITabStop.TabStop => this;
 
@@ -106,7 +117,7 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 			{
 				oldElement.PropertyChanged -= OnElementPropertyChanged;
 			}
-			 
+
 
 			element.PropertyChanged += OnElementPropertyChanged;
 
@@ -451,8 +462,16 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 		float IBorderVisualElementRenderer.ShadowDx => ShadowDx;
 		float IBorderVisualElementRenderer.ShadowDy => ShadowDy;
 		AColor IBorderVisualElementRenderer.ShadowColor => ShadowColor;
-		bool IBorderVisualElementRenderer.UseDefaultPadding() => Button.OnThisPlatform().UseDefaultPadding();
-		bool IBorderVisualElementRenderer.UseDefaultShadow() => Button.OnThisPlatform().UseDefaultShadow();
+		bool IBorderVisualElementRenderer.UseDefaultPadding() => OnThisPlatform().UseDefaultPadding();
+		bool IBorderVisualElementRenderer.UseDefaultShadow() => OnThisPlatform().UseDefaultShadow();
 		bool IBorderVisualElementRenderer.IsShadowEnabled() => true;
+
+		IPlatformElementConfiguration<PlatformConfiguration.Android, Button> OnThisPlatform()
+		{
+			if (_platformElementConfiguration == null)
+				_platformElementConfiguration = Button.OnThisPlatform();
+
+			return _platformElementConfiguration;
+		}
 	}
 }
