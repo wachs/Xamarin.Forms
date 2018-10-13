@@ -83,7 +83,7 @@ namespace Xamarin.Forms.Platform.Android
 				if (_backgroundDrawable == null)
 					_backgroundDrawable = new BorderDrawable(Control.Context.ToPixels, Forms.GetColorButtonNormal(Control.Context));
 
-				_backgroundDrawable.Button = BorderElement;
+				_backgroundDrawable.BorderController = BorderElement;
 
 				var useDefaultPadding = _renderer.UseDefaultPadding();
 

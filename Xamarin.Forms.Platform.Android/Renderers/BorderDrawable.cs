@@ -43,7 +43,7 @@ namespace Xamarin.Forms.Platform.Android
 			_defaultColor = defaultColor;
 		}
 
-		public IBorderController Button
+		public IBorderController BorderController
 		{
 			get;
 			set;
@@ -137,7 +137,7 @@ namespace Xamarin.Forms.Platform.Android
 		{
 		}
 
-		public Color BackgroundColor => Button.BackgroundColor == Color.Default ? _defaultColor : Button.BackgroundColor;
+		public Color BackgroundColor => BorderController.BackgroundColor == Color.Default ? _defaultColor : BorderController.BackgroundColor;
 		public Color PressedBackgroundColor => BackgroundColor.AddLuminosity(-.12);//<item name="highlight_alpha_material_light" format="float" type="dimen">0.12</item>
 
 		protected override void Dispose(bool disposing)
@@ -201,21 +201,21 @@ namespace Xamarin.Forms.Platform.Android
 		{
 			int cornerRadius = DefaultCornerRadius;
 
-			if (Button.IsSet(Button.CornerRadiusProperty) && Button.CornerRadius != (int)Button.CornerRadiusProperty.DefaultValue)
-				cornerRadius = Button.CornerRadius;
+			if (BorderController.IsSet(BorderController.CornerRadiusProperty) && BorderController.CornerRadius != (int)BorderController.CornerRadiusProperty.DefaultValue)
+				cornerRadius = BorderController.CornerRadius;
 
 			return _convertToPixels(cornerRadius);
 		}
 
 		void DrawOutline(Canvas canvas, int width, int height)
 		{
-			if (Button.BorderWidth <= 0)
+			if (BorderController.BorderWidth <= 0)
 				return;
 
 			using (var paint = new Paint { AntiAlias = true })
 			using (var path = new Path())
 			{
-				float borderWidth = _convertToPixels(Button.BorderWidth);
+				float borderWidth = _convertToPixels(BorderController.BorderWidth);
 				float inset = borderWidth / 2;
 
 				// adjust border radius so outer edge of stroke is same radius as border radius of background
@@ -227,7 +227,7 @@ namespace Xamarin.Forms.Platform.Android
 				path.AddRoundRect(rect, borderRadius, borderRadius, Path.Direction.Cw);
 				paint.StrokeWidth = borderWidth;
 				paint.SetStyle(Paint.Style.Stroke);
-				paint.Color = Button.BorderColor.ToAndroid();
+				paint.Color = BorderController.BorderColor.ToAndroid();
 
 				canvas.DrawPath(path, paint);
 			}

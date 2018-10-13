@@ -16,6 +16,7 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 {
 	internal sealed class ImageButtonRenderer :
 		AppCompatImageButton,
+		IVisualElementRenderer,
 		IBorderVisualElementRenderer,
 		IImageRendererController,
 		AView.IOnFocusChangeListener,
@@ -251,9 +252,10 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 		float IBorderVisualElementRenderer.ShadowDy => Context.ToPixels(OnThisPlatform().GetShadowOffset().Height);
 		AColor IBorderVisualElementRenderer.ShadowColor => OnThisPlatform().GetShadowColor().ToAndroid();
 		bool IBorderVisualElementRenderer.IsShadowEnabled() => OnThisPlatform().GetIsShadowEnabled();
-
 		bool IBorderVisualElementRenderer.UseDefaultPadding() => false;
 		bool IBorderVisualElementRenderer.UseDefaultShadow() => false;
+		VisualElement IBorderVisualElementRenderer.Element => ImageButton;
+		AView IBorderVisualElementRenderer.View => this;
 
 		IPlatformElementConfiguration<PlatformConfiguration.Android, ImageButton> OnThisPlatform()
 		{

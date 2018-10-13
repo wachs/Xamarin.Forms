@@ -23,10 +23,12 @@ namespace Xamarin.Forms.Platform.Android
 		bool _isDisposed;
 		int _imageHeight = -1;
 		Thickness _paddingDeltaPix = new Thickness();
+		IVisualElementRenderer _visualElementRenderer;
 
 		public ButtonRenderer(Context context) : base(context)
 		{
 			AutoPackage = false;
+			_visualElementRenderer = this;
 			_backgroundTracker = new BorderBackgroundManager(this);
 		}
 
@@ -34,6 +36,7 @@ namespace Xamarin.Forms.Platform.Android
 		public ButtonRenderer()
 		{
 			AutoPackage = false;
+			_visualElementRenderer = this;
 			_backgroundTracker = new BorderBackgroundManager(this);
 		}
 
@@ -86,6 +89,7 @@ namespace Xamarin.Forms.Platform.Android
 			{
 				_backgroundTracker?.Dispose();
 				_backgroundTracker = null;
+				_visualElementRenderer = null;
 			}
 
 			base.Dispose(disposing);
@@ -116,7 +120,7 @@ namespace Xamarin.Forms.Platform.Android
 
 					button.AddOnAttachStateChangeListener(this);
 				}
-			} 
+			}
 
 			UpdateAll();
 		}
@@ -269,6 +273,13 @@ namespace Xamarin.Forms.Platform.Android
 		bool IBorderVisualElementRenderer.UseDefaultPadding() => Element.OnThisPlatform().UseDefaultPadding();
 		bool IBorderVisualElementRenderer.UseDefaultShadow() => Element.OnThisPlatform().UseDefaultShadow();
 		bool IBorderVisualElementRenderer.IsShadowEnabled() => true;
+		VisualElement IBorderVisualElementRenderer.Element => Element;
+		AView IBorderVisualElementRenderer.View => Control;
+		event EventHandler<VisualElementChangedEventArgs> IBorderVisualElementRenderer.ElementChanged
+		{
+			add => _visualElementRenderer.ElementChanged += value;
+			remove => _visualElementRenderer.ElementChanged -= value;
+		}
 
 		void UpdatePadding()
 		{

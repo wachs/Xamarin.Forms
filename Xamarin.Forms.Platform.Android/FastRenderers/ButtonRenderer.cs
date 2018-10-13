@@ -465,6 +465,7 @@ namespace Xamarin.Forms.Platform.Android.FastRenderers
 		bool IBorderVisualElementRenderer.UseDefaultPadding() => OnThisPlatform().UseDefaultPadding();
 		bool IBorderVisualElementRenderer.UseDefaultShadow() => OnThisPlatform().UseDefaultShadow();
 		bool IBorderVisualElementRenderer.IsShadowEnabled() => true;
+		AView IBorderVisualElementRenderer.View => this;
 
 		IPlatformElementConfiguration<PlatformConfiguration.Android, Button> OnThisPlatform()
 		{

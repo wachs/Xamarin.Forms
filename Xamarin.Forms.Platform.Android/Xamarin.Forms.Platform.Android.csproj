@@ -189,7 +189,7 @@
     <Compile Include="PowerSaveModeBroadcastReceiver.cs" />
     <Compile Include="Renderers\AHorizontalScrollView.cs" />
     <Compile Include="Renderers\AlignmentExtensions.cs" />
-    <Compile Include="Renderers\BoderDrawable.cs" />
+    <Compile Include="Renderers\BorderDrawable.cs" />
     <Compile Include="Renderers\ButtonRenderer.cs" />
     <Compile Include="Renderers\ConditionalFocusLayout.cs" />
     <Compile Include="Renderers\DescendantFocusToggler.cs" />
