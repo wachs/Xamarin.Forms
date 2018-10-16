@@ -646,6 +646,7 @@
     <Compile Include="Issues\Gh3862.xaml.cs">
       <DependentUpon>Gh3862.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DesignTimeLoaderTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
